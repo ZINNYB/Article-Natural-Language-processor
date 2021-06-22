@@ -11,6 +11,11 @@ module.exports = {
   optimization: {
     minimizer: [new TerserwebpackPlugin({}), new OptimizeCssAssets({})],
   },
+  node: {
+    fs: 'empty',
+    tls: 'empty',
+    child_process: "empty"
+  },
   output: {
     libraryTarget: "var",
     library: "Client",
