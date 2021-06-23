@@ -2,10 +2,12 @@ const dotenv = require("dotenv");
 dotenv.config();
 var path = require("path");
 const express = require("express");
+
 const Api_Key = process.env.API_KEY;
 const fetch = require("node-fetch");
 var bodyParser = require("body-parser");
 var cors = require("cors");
+
 // other resources
 const url = `https://api.meaningcloud.com/lang-4.0/${Api_Key}`;
 const mockAPIResponse = require("./mockAPI.js");
@@ -15,10 +17,6 @@ const { application } = require("express");
 // Instantiating
 const app = express();
 app.use(cors());
-// to use json
-// var jsonParser = bodyParser.json();
-// // create application/x-www-form-urlencoded parser
-// var urlencodedParser = bodyParser.urlencoded({ extended: false });
 app.use(
   bodyParser.urlencoded({
     extended: true,
@@ -36,19 +34,29 @@ app.get("/test", function (req, res) {
 app.get("/", function (req, res) {
   res.sendFile(path.resolve("dist/index.html"));
 });
-app.post("/valid", function (req, res) {
-  console.log(req.body);
-  const nameData = req.body.content;
 
+
+
+app.post("/valid", function (req, res) {
+  const nameData = req.body.content;
+  // Form data
+  const formdata = new FormData();
+  formdata.append("key", `${Api_Key}`);
+  formdata.append("txt", `${nameData}`);
+  formdata.append("lang", "en");  // 2-letter code, like en es fr ...
+
+  const requestOptions = {
+    method: 'POST',
+    body: formdata,
+    redirect: 'follow',
+    headers: {
+      "Content-Type": "application/JSON",
+    },
+  };
+  console.log(req.body);
+console.log(`https://api.meaningcloud.com/sentiment-2.1?`,requestOptions);
   fetch(
-    `https://api.meaningcloud.com/sentiment-2.1?key=${Api_Key}&url=${nameData}&lang=en`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/JSON",
-      },
-    }
-  )
+    `https://api.meaningcloud.com/sentiment-2.1?`, requestOptions)
     .then((response) => {
       return response.json();
     })
