@@ -13,17 +13,25 @@ async function handleSubmit(event) {
     credentials: "same-origin",
     headers: {
       "Content-Type": "application/json",
-    }
+    },
   })
     .then((res) => res.json())
     .then(function (res) {
       // const newData = await res.json();
       console.log("response from /postData", res);
-      document.getElementById('score_tag').innerHTML = `score_tag: ${res.scoreTag}`;
-      document.getElementById('agreement').innerHTML = `Agreement: ${res.agreement}`;
-      document.getElementById('sensitivity').innerHTML = `Subjectivity: ${res.subjectivity}`;
-      document.getElementById('confidence').innerHTML = `Confidence: ${res.confidence}`;
-      document.getElementById('irony').innerHTML = `Irony: ${res.irony}`;
+      document.getElementById(
+        "score_tag"
+      ).innerHTML = `score_tag: ${res.scoreTag}`;
+      document.getElementById(
+        "agreement"
+      ).innerHTML = `Agreement: ${res.agreement}`;
+      document.getElementById(
+        "sensitivity"
+      ).innerHTML = `Subjectivity: ${res.subjectivity}`;
+      document.getElementById(
+        "confidence"
+      ).innerHTML = `Confidence: ${res.confidence}`;
+      document.getElementById("irony").innerHTML = `Irony: ${res.irony}`;
     });
 }
-export { handleSubmit };
+export { handleSubmit, formText };

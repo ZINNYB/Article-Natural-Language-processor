@@ -7,7 +7,6 @@ const fetch = require("node-fetch");
 var bodyParser = require("body-parser");
 var cors = require("cors");
 // other resources
-const url = `https://api.meaningcloud.com/lang-4.0/${Api_Key}`;
 const mockAPIResponse = require("./mockAPI.js");
 const { FormData } = require("formdata-node");
 const { inspector } = require("inspector");
@@ -31,9 +30,13 @@ app.get("/", function (req, res) {
 });
 app.post("/valid", function (req, res) {
   const nameData = req.body.content;
-  console.log('nameData ======> ', nameData);
-  // console.log(`https://api.meaningcloud.com/sentiment-2.1?key=${Api_Key}&url=${nameData}&lang=en`);
-  fetch(`https://api.meaningcloud.com/sentiment-2.1?key=${Api_Key}&url=${nameData}&lang=en`)
+  console.log("nameData ======> ", nameData);
+  console.log(
+    `https://api.meaningcloud.com/sentiment-2.1?key=${Api_Key}&url=${nameData}&lang=en`
+  );
+  fetch(
+    `https://api.meaningcloud.com/sentiment-2.1?key=${Api_Key}&url=${nameData}&lang=en`
+  )
     .then((response) => {
       return response.json();
     })
