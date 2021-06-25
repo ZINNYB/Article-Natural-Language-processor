@@ -34,4 +34,4 @@ async function handleSubmit(event) {
       document.getElementById("irony").innerHTML = `Irony: ${res.irony}`;
     });
 }
-export { handleSubmit, formText };
+export { handleSubmit };
