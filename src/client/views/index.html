@@ -18,9 +18,10 @@
 
     <main>
       <section>
+        <div id="error"></div>
         <form
           method="POST"
-          class=""
+          id="form"
           action="http://localhost:8081/valid"
           onsubmit="return Client.handleSubmit(event)"
         >
@@ -29,6 +30,7 @@
             type="text"
             name="input"
             onblur="onBlur()"
+            required
             placeholder="Enter link to your article"
           />
           <input type="submit" name="" value="submit" />

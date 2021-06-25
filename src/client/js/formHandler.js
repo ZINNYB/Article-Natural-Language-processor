@@ -2,6 +2,19 @@ async function handleSubmit(event) {
   event.preventDefault();
   // check what text was put into the form field
   let formText = document.getElementById("name").value;
+  let formValid = document.getElementById("name");
+  let form = document.getElementById("form");
+  const errorElement = document.getElementById("error");
+  form.addEventListener("submit", (e) => {
+    let message = [];
+    if (formValid.value === "" || formValid == null) {
+      messages.push('"Url is required"');
+    }
+    if (messages.length > 0) {
+      e.preventDefault();
+      errorElement.innerText = messages.join(",");
+    }
+  });
   Client.checkForName(formText);
   console.log("::: Form Submitted :::");
   fetch("http://localhost:8081/valid", {
